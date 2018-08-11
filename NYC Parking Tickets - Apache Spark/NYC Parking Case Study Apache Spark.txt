@@ -1,0 +1,746 @@
+(1)The data files for 2015, 2016, 2017 years are present in s3 bucket s3://datascibkt/
+(2) The fine amount for different codes are present in the csv file "fines.csv", which is also present in s3 bucket s3://datascibkt/
+In this file, the records where there were no values  for fine has been kept as blank.
+
+
+
+
+total number of records in 2015 data set=11809233
+
+total number of records in 2016 data set=10626899
+
+total number of records in 2017 data set=10803028
+
+
+
+
+
+
+
+## Find total number of tickets for each year.
+
+## Tickets logged 11809233 in 2015
+
+## Tickets logged 10626899 in 2016
+
+## Tickets logged 10803028 in 2017
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Find out how many unique states the cars which got parking tickets came from.
+
+
+## 69 unique states in 2015
+
+
+## 68 unique states in 2016
+
+
+## 67 unique states in 2017
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Some parking tickets don’t have addresses on them, which is cause for concern. Find out how many such tickets there are.
+
+## 1992401 tickets with either House number not available or Street Name not available  
+
+
+## 2035232 tickets with either House number not available or Street Name not available  
+
+
+## 2289944 tickets with either House number not available or Street Name not available 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Aggregation Analysis
+
+## How often does each violation code occur? (frequency of violation codes - find the top 5)
+
+## Foe 2015, top 5 are Code 21, 38, 14, 36, 37
+
+##  Top 5 for 2016 are Code 21, 38, 14, 36, 37
+
+
+## Top 5  for 2017 are Code 21, 38, 14, 36, 20
+
+
+
+
+## FORD, TOYOT, HONDA, NISSA, CHEVR
+
+## Find the (5 highest) frequencies of: Violating Precincts, Issuing Precincts
+#5 precincts with violating frequecies in 2015:
+## precinct 0, 19, 18, 14, 1
+
+#5 precincts with issuing frequecies in 2015:
+## precinct 0, 19, 14, 1, 18
+
+#5 precincts with violating frequecies in 2016:
+## precinct 0, 19, 18, 14, 1
+
+#5 precincts with issuing frequecies in 2016:
+## precinct 0, 19, 14, 1, 18
+
+
+#5 precincts with violating frequecies in 2017:
+## precinct 0, 19, 18, 14, 1
+
+#5 precincts with issuing frequecies in 2017:
+## precinct 0, 19, 14, 1, 18
+
+
+
+## Find the violation code frequency across 3 precincts which have issued the most number of tickets - do these precinct zones have an exceptionally high frequency of certain violation codes? Are these codes common across precincts?
+
+## Voilation code 21 is common in issuer precint 18 and 19 in 2015
+
+
+## Voilation code 21 is common in issuer precint 0 and 19 in 2016
+
+
+## Voilation code 38 is common in issuer precint 0 and 19 in 2017
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#(2)	Find a way to deal with missing values, if any.
+
+#for 2015 data set
+
+#number  of missing entries in Violation Time column is 1715
+#total number of records in 2015 data set is 11809233
+#percentage of missing entries= (1715*100)/11809233 =0.0145 percent
+
+
+
+#for 2016 data set
+
+#number  of missing entries in Violation Time column is 4280
+#total number of records in 2016 data set is 10626899
+#percentage of missing entries= (4280*100)/10626899 =0.040 percent
+
+#for 2017 dataset
+#number  of missing entries in Violation Time column is 63
+#total number of records in 2017 data set is 10803028
+#percentage of missing entries= (63*100)/10803028 =0.0005 percent
+
+
+
+
+#Divide 24 hours into 6 equal discrete bins of time. 
+#The intervals you choose are at your discretion. 
+#For each of these groups, find the 3 most commonly occurring violations
+
+#creating 6 bins as
+#0-4 hrs -latenight
+#4-8 hrs - earlyMor
+#8-12 hrs -morning
+#12-16 hrs -afternoon
+#16-20 hrs -evening
+#20-00 hrs -lateEve
+
+
+
+
+
+
+
+
+
+
+#finding top 3 violation for each timeslot in 2015
+
+#timeslot       violationCode	 count_
+#1  latenight            21 	 69557
+#2  latenight            40 	 40335
+#3  latenight            78 	 37575
+
+
+#timeslot       violationCode	 count_
+#1  earlyMor            14 	143264
+#2  earlyMor            21	 118316
+#3  earlyMor            40	  98135
+
+
+#timeslot       violationCode	 count_
+#1    morning            21	 	1291540
+#2    morning            38 	 480358
+#3    morning            36 	 396838
+
+#timeslot       violationCode 	count_
+#1   afternoon            38	 609616
+#2   afternoon            37 	446482
+#3   afternoon            36 	357310
+
+#timeslot       violationCode 	count_
+#1   evening            38 		258838
+#2   evening            37		 187186
+#3   evening             7 		182347
+
+
+#timeslot       violationCode	 count_
+#1   lateEve             7 		 89813
+#2   lateEve            38 		 66023
+#3   lateEve            40 		 49947
+
+
+
+
+
+
+#finding top 3 violation for each timeslot in 2016:
+
+#timeslot       violationCode 	count_
+#1  latenight            21 	 67798
+#2  latenight            40 	 37261
+#3  latenight            78 	 29473
+
+
+#timeslot       violationCode 	count_
+#1  earlyMor            14 		140111
+#2  earlyMor            21		 114029
+#3  earlyMor            40		  91693
+
+#timeslot       violationCode		 count_
+#1    morning            21 		1209244
+#2    morning            36 		 586791
+#3    morning            38 		 388099
+
+
+#timeslot       violationCode 	count_
+#1  afternoon            36 545717
+#2  afternoon            38 488363
+#3  afternoon            37 383379
+
+
+#timeslot       violationCode 	count_
+#1   evening            38 211267
+#2   evening            37 161655
+#3   evening            14 134976
+
+
+
+#timeslot       violationCode 	count_
+#1   lateEve             7  60924
+#2   lateEve            38  53174
+#3   lateEve            40  44992
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# for 2017
+#timeslot       violationCode count_
+#1  latenight            21  73160
+#2  latenight            40  45960
+#3  latenight            14  29313
+
+
+
+
+#timeslot       violationCode	 count_
+#1 earlyMor            14 		141276
+#2  earlyMor            21 		119469
+#3  earlyMor            40 		112187
+
+
+#timeslot       violationCode count_
+#1   morning            21 1182691
+#2   morning            36  751422
+#3   morning            38  346518
+
+
+
+#timeslot       violationCode count_
+#1  afternoon            36 588395
+#2  afternoon            38 462859
+#3  afternoon            37 337096
+
+
+
+#timeslot       violationCode count_
+#1   evening            38 203232
+#2   evening            37 145784
+#3   evening            14 144749
+
+
+
+
+#timeslot       violationCode count_
+#1   lateEve             7  65593
+#2   lateEve            38  47032
+#3   lateEve            14  44786
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Now, try another direction. For the 3 most commonly occurring violation codes, 
+#find the most common times of day (in terms of the bins from the previous part)
+
+
+
+#top 3 violation codes for 2015
+#violationCode  		count_
+#1              21		 1630912
+#2              38 		 1418627
+#3              14 		  988463
+
+
+
+
+#violationCode  timeslot  count_
+#1             14   morning  317009
+#2             14 afternoon  289367
+#3             14   evening  160432
+#4             14  earlyMor  143264
+#5             14   lateEve   49524
+#6             14 latenight   28867
+#7             21   morning 1291540
+#8             21 afternoon  149872
+#9             21  earlyMor  118316
+#10            21 latenight   69557
+#11            21   evening     905
+#12            21   lateEve     722
+#13            38 afternoon  609616
+#14            38   morning  480358
+#15            38   evening  258838
+#16            38   lateEve   66023
+#17            38  earlyMor    3050
+#18            38 latenight     742
+
+
+
+
+#top 3 violation codes for 2016
+#    violationCode  		count_
+#1              21 		1530787
+#2              36 		1253511
+#3              38 		1143438
+
+
+
+                                                 
+#violationCode  timeslot  count_
+#1             21   morning 1209244
+#2             21 afternoon  138641
+#3             21  earlyMor  114029
+#4             21 latenight   67798
+#5             21   evening     601
+#6             21   lateEve     474
+#7             36   morning  586791
+#8             36 afternoon  545717
+#9             36  earlyMor   79797
+#10            36   evening   41205
+#11            36 latenight       1
+#12            38 afternoon  488363
+#13            38   morning  388099
+#14            38   evening  211267
+#15            38   lateEve   53174
+#16            38  earlyMor    2211
+#17            38 latenight     324
+
+
+
+
+
+
+
+
+#top 3 violation codes for 2017
+#violationCode  		count_
+#1              21 1528588
+#2              36 1400614
+#3              38 1062304
+
+
+
+
+#violationCode  timeslot  count_
+#1             21   morning 1182691
+#2             21 afternoon  152314
+#3             21  earlyMor  119469
+#4             21 latenight   73160
+#5             21   evening     551
+#6             21   lateEve     403
+#7             36   morning  751422
+#8             36 afternoon  588395
+#9             36  earlyMor   33939
+#10            36   evening   26858
+#11            38 afternoon  462859
+#12            38   morning  346518
+#13            38   evening  203232
+#14            38   lateEve   47032
+#15            38  earlyMor    2300
+#16            38 latenight     363
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#set season as follows:
+#month =04 or 05 or 06 or 07, or 08 or 09- season1
+#otherwise - season2
+
+#count of ticket for each season in 2015
+#season   		count_
+#1 season1 		6178679
+#2 season2 		5628839
+
+
+
+
+
+
+
+
+
+
+#count of ticket for each season in 2016
+
+#season   		count_
+#1 season2 		5471979
+#2 season1 		5150640
+
+
+
+#count of ticket for each season in 2017
+#season   		count_
+#1 season1 		5482742
+#2 season2 		5320223
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  in 2015
+
+#here,3 most common violations for season 1 are: 
+#season      violationCode count_
+#1   season1            21 883664
+#2   season1            38 699200
+#3   season1            14 503344
+
+#here,3 most common violations for season 2 are: 
+#season      violationCode count_
+#1 season2            21 747248
+#1 season2            38 719427
+#1 season2            14 485119
+
+
+
+
+
+
+
+#in 2016
+#here,3 most common violations for season 1 are: 
+#season      violationCode count_
+#1   season1            21 751394
+#2   season1            38 560011
+#3   season1            36 477759
+
+#here,3 most common violations for season 2 are: 
+#season      violationCode count_
+#1 season2            21 779393
+#2 season2            36 775752
+#3 season2            38 583427
+
+
+
+
+
+
+
+
+
+
+
+
+#in 2017
+#here,3 most common violations for season 1 are: 
+
+#season      violationCode count_
+#1   season1            21 806958
+#2   season1            36 609781
+#3   season1            38 511894
+
+
+#here,3 most common violations for season 2 are: 
+
+#season      violationCode count_
+#1 season2            36 790833
+#2 season2            21 721630
+#3 season2            38 550410
+
+
+#top 3 violation codes along with their occurrence are:
+#			violationCode   count_
+#1             21 			1528588
+#2              36 			1400614
+#3              38 			1062304
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+##########################################################
+#	Using this information, find the total amount collected for all of the fines. 
+#State the code which has the highest total collection. 
+
+
+#    violationCode   totalFine 		count_
+#1             14 102752155.0      1
+#2             21  84072340.0      1
+#3             36  70030700.0      1
+#4             46  69001380.0      1
+#5             40  59755495.0      1
+#6             38  53115200.0      1
+#7             20  38662062.5      1
+#8             71  33885020.0      1
+#9             19  33455800.0      1
+#10            37  29838450.0      1
+#11             7  25819750.0      1
+#12            70  17802655.0      1
+#13            31  16868200.0      1
+#14             5  16750325.0      1
+#15            16  15242560.0      1
+#16            47  13101605.0      1
+#17            69  11928085.0      1
+#18            50  11513225.0      1
+#19            48   9608250.0      1
+#20            74   7323485.0      1
+#21            17   7117020.0      1
+#22            51   7059735.0      1
+#23             9   6512795.0      1
+#24            10   5377285.0      1
+#25            98   4846045.0      1
+#26            24   4385500.0      1
+#27            53   4062145.0      1
+#28            84   3938440.0      1
+#29            82   3841460.0      1
+#30            78   3688360.0      1
+#31            42   3245900.0      1
+#32            68   2791360.0      1
+#33            67   2600235.0      1
+#34            13   2427535.0      1
+#35            18   2111630.0      1
+#36            45   1869900.0      1
+#37            66   1424280.0      1
+#38            85   1267630.0      1
+#39            27   1236060.0      1
+#40            64   1098580.0      1
+#41            23    993937.5      1
+#42            11    819605.0      1
+#43            79    713000.0      1
+#44            77    653290.0      1
+#45            72    638950.0      1
+#46            61    602195.0      1
+#47             1    544870.0      1
+#48            75    536965.0      1
+#49            83    520065.0      1
+#50            89    402960.0      1
+#51            30    372345.0      1
+#52            60    369820.0      1
+#53             3    347110.0      1
+#54            62    314160.0      1
+#55             8    265535.0      1
+#56            80    230002.5      1
+#57            73    227630.0      1
+#58            35    174750.0      1
+#59            39    173125.0      1
+#60            52    165025.0      1
+#61            26    143520.0      1
+#62             6    124020.0      1
+#63            63    105545.0      1
+#64            49     83220.0      1
+#65            56     81995.0      1
+#66             2     65405.0      1
+#67             4     61237.5      1
+#68            94     58350.0      1
+#69            91     55165.0      1
+#70            59     26795.0      1
+#71            55     25645.0      1
+#72            81     25365.0      1
+#73            29     23690.0      1
+#74            25     19435.0      1
+#75            43     18500.0      1
+#76            65     10260.0      1
+#77            96      7695.0      1
+#78            22      6600.0      1
+#79            12      6175.0      1
+#80            97      6160.0      1
+#81            58      3190.0      1
+#82            92      2365.0      1
+#83            33      2200.0      1
+#84            86      1840.0      1
+#85            32      1750.0      1
+#86            93      1495.0      1
+#87            34       900.0      1
+#88            28       855.0      1
+#89            44       400.0      1
+#90            57       325.0      1
+#91            99         0.0      1
+
+
+#the code which has the highest total collection is as shown below:
+#    violationCode   totalFine 	
+#          14       102752155.0 
+
+
+#sum_of_total_fine= 801464075
+
+
